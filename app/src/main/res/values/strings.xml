@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Movieazy</string>
+    <string name="now_showing">Now Showing</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="book_now">BOOK NOW</string>
+    <string name="movies">Movies</string>
+    <!--    <string name="auth_token">eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MjliMTlmYzM4ZGNlOGY0YjJlMTIwNjhiMDAzMzkwOCIsInN1YiI6IjYxYWE0OTA0OTdlYWI0MDA2MjVhNzkyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GWrPYt6_Bl0QtfMRd-2Ct24V8-EepqyzABQ6bpoQjtw</string>-->
+
+
+</resources>
