@@ -24,6 +24,8 @@ interface ApiInterface {
     @GET("movie/{movieId}")
     suspend fun getMovieDetails(
         @Path("movieId") movieId: Int,
-        @Query("api_key") apiKey: String = "429b19fc38dce8f4b2e12068b0033908"
+        @Query("api_key") apiKey: String = "429b19fc38dce8f4b2e12068b0033908",
+        @Query("language") language: String = "en-US",
+        @Query("append_to_response") appendToResponse: String = "release_dates",
     ): MovieDetails
 }

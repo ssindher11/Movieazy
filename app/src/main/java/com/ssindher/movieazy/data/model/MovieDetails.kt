@@ -17,6 +17,7 @@ data class MovieDetails(
     val production_companies: List<ProductionCompany>? = listOf(),
     val production_countries: List<ProductionCountry>? = listOf(),
     val release_date: String? = "",
+    val release_dates: ReleaseDates? = ReleaseDates(),
     val revenue: Int? = 0,
     val runtime: Int? = 0,
     val spoken_languages: List<SpokenLanguage>? = listOf(),
@@ -50,6 +51,23 @@ data class MovieDetails(
         val iso_3166_1: String? = "",
         val name: String? = ""
     )
+
+    data class ReleaseDates(
+        val results: List<Result>? = listOf()
+    ) {
+        data class Result(
+            val iso_3166_1: String? = "",
+            val release_dates: List<ReleaseDate>? = listOf()
+        ) {
+            data class ReleaseDate(
+                val certification: String? = "",
+                val iso_639_1: String? = "",
+                val note: String? = "",
+                val release_date: String? = "",
+                val type: Int? = 0
+            )
+        }
+    }
 
     data class SpokenLanguage(
         val english_name: String? = "",

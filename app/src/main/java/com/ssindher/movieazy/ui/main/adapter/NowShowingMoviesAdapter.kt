@@ -1,19 +1,24 @@
 package com.ssindher.movieazy.ui.main.adapter
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ssindher.movieazy.R
 import com.ssindher.movieazy.data.model.MovieOverview
-import com.ssindher.movieazy.utils.DualEventListeners
+import com.ssindher.movieazy.ui.details.activity.MovieDetailsActivity
 import kotlinx.android.synthetic.main.item_now_showing_movie.view.*
 
 class NowShowingMoviesAdapter(
+    private val activityCtx: Context,
     private val list: MutableList<MovieOverview.Result>,
-    private val dualEventListeners: DualEventListeners
 ) : RecyclerView.Adapter<NowShowingMoviesAdapter.MovieVH>() {
 
     inner class MovieVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,11 +31,24 @@ class NowShowingMoviesAdapter(
                     .into(ivMoviePoster)
 
                 setOnClickListener {
-                    dualEventListeners.click(pos, 1)
+                    val intent = Intent(context, MovieDetailsActivity::class.java)
+                    intent.putExtra("movie", movie)
+
+                    ivMoviePoster.transitionName = "poster_transition"
+                    val tPair = androidx.core.util.Pair<View, String>(
+                        ivMoviePoster,
+                        ivMoviePoster.transitionName
+                    )
+
+                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        activityCtx as Activity,
+                        tPair
+                    )
+                    activityCtx.startActivity(intent, options.toBundle())
                 }
 
                 setOnLongClickListener {
-                    dualEventListeners.click(pos, 2)
+                    Toast.makeText(activityCtx, movie.title, Toast.LENGTH_SHORT).show()
                     true
                 }
 

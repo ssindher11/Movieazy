@@ -17,7 +17,7 @@ import com.ssindher.movieazy.ui.main.adapter.NowShowingMoviesAdapter
 import com.ssindher.movieazy.ui.main.adapter.PopularMoviesAdapter
 import com.ssindher.movieazy.ui.main.viewmodel.HomepageViewModel
 import com.ssindher.movieazy.utils.DualEventListeners
-import com.ssindher.movieazy.utils.EventListeners
+import com.ssindher.movieazy.utils.Utils.dp
 import kotlinx.android.synthetic.main.activity_homepage.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.abs
@@ -103,39 +103,40 @@ class HomepageActivity : AppCompatActivity() {
 
     private fun setupNowShowingRV() {
         rvMovies.layoutManager = GridLayoutManager(this, 3)
-        nowShowingMoviesAdapter =
-            NowShowingMoviesAdapter(
-                nowShowingMoviesList,
-                object : DualEventListeners {
-                    override fun click(pos: Int, flag: Int) {
-                        val movie = nowShowingMoviesList[pos]
-                        when (flag) {
-                            1 -> {
-                                val intent =
-                                    Intent(this@HomepageActivity, MovieDetailsActivity::class.java)
-                                intent.putExtra("movie", movie)
-                                startActivity(intent)
-                            }
-                            2 -> Toast.makeText(
-                                this@HomepageActivity,
-                                movie.title,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                })
+        nowShowingMoviesAdapter = NowShowingMoviesAdapter(this, nowShowingMoviesList)
         rvMovies.adapter = nowShowingMoviesAdapter
     }
 
     private fun setupPopularVP(list: List<MovieOverview.Result>) {
         vpPopularMovies.adapter =
-            PopularMoviesAdapter(list.toMutableList(), vpPopularMovies, object : EventListeners {
-                override fun click(pos: Int) {
-                    val intent = Intent(this@HomepageActivity, MovieDetailsActivity::class.java)
-                    intent.putExtra("movie", list[pos % list.size])
-                    startActivity(intent)
-                }
-            })
+            PopularMoviesAdapter(
+                list.toMutableList(),
+                vpPopularMovies,
+                object : DualEventListeners {
+                    override fun click(pos: Int, flag: Int) {
+                        when (flag) {
+                            1 -> {
+                                val intent =
+                                    Intent(this@HomepageActivity, MovieDetailsActivity::class.java)
+                                intent.putExtra("movie", list[pos % list.size])
+                                startActivity(intent)
+                            }
+                            2 -> Toast.makeText(
+                                this@HomepageActivity,
+                                list[pos % list.size].title,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        nsv.viewTreeObserver.addOnScrollChangedListener {
+            val scrollY = nsv.scrollY
+            tvTopLabel.text = if (scrollY < tvNowShowingLabel.y + 20.dp) "Movies" else "Now Showing"
+        }
     }
 
     override fun onPause() {

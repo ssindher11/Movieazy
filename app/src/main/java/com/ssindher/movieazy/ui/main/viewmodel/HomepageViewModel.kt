@@ -12,67 +12,6 @@ import java.util.*
 
 class HomepageViewModel(private val repository: MovieRepository) : ViewModel() {
 
-    /*private val _popularMoviesList = MutableLiveData<List<MovieOverview.Result>>()
-    val popularMoviesList: LiveData<List<MovieOverview.Result>> = _popularMoviesList
-    private lateinit var popularMoviesListDisposable: DisposableSingleObserver<MovieOverview>
-    private val _popularMoviesListLoader = MutableLiveData<Boolean>()
-    val popularMoviesListLoader: LiveData<Boolean> = _popularMoviesListLoader
-    private val _popularMoviesListError = MutableLiveData<String>()
-    val popularMoviesListError: LiveData<String> = _popularMoviesListError
-
-    fun getPopularMovies() {
-        popularMoviesListDisposable = object : DisposableSingleObserver<MovieOverview>() {
-            override fun onSuccess(t: MovieOverview) {
-                _popularMoviesList.postValue(t.results ?: listOf())
-                _popularMoviesListLoader.postValue(false)
-            }
-
-            override fun onError(e: Throwable) {
-                _popularMoviesListLoader.postValue(false)
-                _popularMoviesListError.postValue(Utils.getErrorMessage(e))
-            }
-        }
-        _popularMoviesListLoader.postValue(true)
-        repository.getPopularMovies()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(popularMoviesListDisposable)
-        compositeDisposable.add(popularMoviesListDisposable)
-    }
-
-
-    private val _nowShowingMoviesList = MutableLiveData<List<MovieOverview.Result>>()
-    val nowShowingMoviesList: LiveData<List<MovieOverview.Result>> = _nowShowingMoviesList
-    private lateinit var nowShowingMoviesListDisposable: DisposableSingleObserver<MovieOverview>
-    private val _nowShowingMoviesListLoader = MutableLiveData<Boolean>()
-    val nowShowingMoviesListLoader: LiveData<Boolean> = _nowShowingMoviesListLoader
-    private val _nowShowingMoviesListError = MutableLiveData<String>()
-    val nowShowingMoviesListError: LiveData<String> = _nowShowingMoviesListError
-
-    fun getNowShowingMovies(page: Int = 1) {
-        nowShowingMoviesListDisposable = object : DisposableSingleObserver<MovieOverview>() {
-            override fun onSuccess(t: MovieOverview) {
-                _nowShowingMoviesList.postValue(t.results ?: listOf())
-                _nowShowingMoviesListLoader.postValue(false)
-            }
-
-            override fun onError(e: Throwable) {
-                _nowShowingMoviesListLoader.postValue(false)
-                _nowShowingMoviesListError.postValue(Utils.getErrorMessage(e))
-            }
-        }
-        _nowShowingMoviesListLoader.postValue(true)
-        val cal = Calendar.getInstance()
-        val endDate = Utils.getFormattedDate(cal.time)
-        cal.add(Calendar.MONTH, -1)
-        val startDate = Utils.getFormattedDate(cal.time)
-        repository.getNowShowingMovies(startDate, endDate, page)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(nowShowingMoviesListDisposable)
-        compositeDisposable.add(nowShowingMoviesListDisposable)
-    }*/
-
     private val _popularMoviesList = MutableLiveData<List<MovieOverview.Result>>()
     val popularMoviesList: LiveData<List<MovieOverview.Result>> = _popularMoviesList
     private val _popularMoviesListError = MutableLiveData<String>()
@@ -123,14 +62,4 @@ class HomepageViewModel(private val repository: MovieRepository) : ViewModel() {
             }
         }
     }
-
-
-    /*fun getMovieDetails(movieId: Int) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(null))
-        try {
-            emit(Resource.success(repository.getMovieDetails(movieId)))
-        } catch (e: Exception) {
-            emit(Resource.error(null, Utils.getErrorMessage(e)))
-        }
-    }*/
 }

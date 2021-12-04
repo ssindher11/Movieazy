@@ -68,7 +68,7 @@
         android:contentDescription="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        tools:src="@color/purple_200" />
+        tools:src="@drawable/placeholder" />
 
     <TextView
         android:id="@+id/tvMovieName"
@@ -95,6 +95,21 @@
         app:layout_constraintTop_toBottomOf="@+id/tvMovieName"
         tools:text="R | 3h 7min | 30 Dec, 2015" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGenres"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieMeta"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_genre" />
+
     <RatingBar
         android:id="@+id/rbStars"
         style="@style/Widget.AppCompat.RatingBar.Small"
@@ -107,7 +122,7 @@
         android:progressTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/tvReviewCount"
         app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovieMeta"
+        app:layout_constraintTop_toBottomOf="@+id/rvGenres"
         app:layout_constraintVertical_bias="1"
         tools:rating="4.5" />
 

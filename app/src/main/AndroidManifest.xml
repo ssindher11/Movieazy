@@ -16,7 +16,9 @@
         tools:ignore="AllowBackup,LockedOrientationActivity">
         <activity
             android:name=".ui.details.activity.MovieDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main.activity.HomepageActivity"
             android:exported="true"

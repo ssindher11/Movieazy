@@ -9,13 +9,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.ssindher.movieazy.R
 import com.ssindher.movieazy.data.model.MovieOverview
-import com.ssindher.movieazy.utils.EventListeners
+import com.ssindher.movieazy.utils.DualEventListeners
 import kotlinx.android.synthetic.main.item_popular_movie.view.*
 
 class PopularMoviesAdapter(
     private val list: MutableList<MovieOverview.Result>,
     private val viewPager: ViewPager2,
-    private val eventListener: EventListeners
+    private val dualEventListeners: DualEventListeners
 ) : RecyclerView.Adapter<PopularMoviesAdapter.PopularVH>() {
 
     inner class PopularVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,7 +25,11 @@ class PopularMoviesAdapter(
                 val backdropUrl = "https://image.tmdb.org/t/p/w300${movie.backdrop_path}"
                 Glide.with(this).load(backdropUrl).into(ivMovieBackdrop)
 
-                setOnClickListener { eventListener.click(pos) }
+                setOnClickListener { dualEventListeners.click(pos, 1) }
+                setOnLongClickListener {
+                    dualEventListeners.click(pos, 2)
+                    true
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ package com.ssindher.movieazy.di
 
 import com.ssindher.movieazy.data.api.ApiInterface
 import com.ssindher.movieazy.data.repository.MovieRepository
+import com.ssindher.movieazy.ui.details.viewmodel.MovieDetailsViewModel
 import com.ssindher.movieazy.ui.main.viewmodel.HomepageViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,6 +18,7 @@ class AppModule {
     val appModule = module {
         single { MovieRepository(get()) }
         viewModel { HomepageViewModel(get()) }
+        viewModel { MovieDetailsViewModel(get()) }
     }
 
     val netModule = module {
